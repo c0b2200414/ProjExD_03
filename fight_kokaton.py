@@ -60,7 +60,7 @@ class Bird:
             (-1, -1): pg.transform.rotozoom(img0, -45, 1.0),
             (-1, 0): img0,
             (-1, +1):pg.transform.rotozoom(img1, 45, 1.0),
-            (0, +1):pg.transform.rotozoom(img1, -90, 1.0),
+            (0, +1):pg.transform.rotozoom(img0, -90, 1.0),
             (+1, +1):pg.transform.rotozoom(img1, -45, 1.0)
         }
         self._img = self._imgs[(+1, 0)]
@@ -163,7 +163,7 @@ def main():
     beam = None
 
     tmr = 0
-    N =0
+    N = 0
     while True:
         for event in pg.event.get():
             if event.type == pg.QUIT:
@@ -172,10 +172,6 @@ def main():
                 beam = Beam(bird)
         tmr += 1
         screen.blit(bg_img, [0, 0])
-
-        score = pg.font.Font(None,80)
-        txt = score.render(f"score {N}", True ,(255,255,255))
-        screen.blit(txt,[100,100])
         
         for bomb in bombs:
             bomb.update(screen)
@@ -189,6 +185,10 @@ def main():
         key_lst = pg.key.get_pressed()
         bird.update(key_lst, screen)
 
+        score = pg.font.Font(None,80)
+        txt = score.render(f"score:{N}", True, (0,0,0))
+        screen.blit(txt, [100,100])
+
         for bomb in bombs:
             bomb.update(screen) 
         if beam is not None:
@@ -201,6 +201,7 @@ def main():
                     bird.change_img(6, screen)
                     pg.display.update()
                     break
+
 
         pg.display.update()
         clock.tick(1000)
