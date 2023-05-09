@@ -172,6 +172,10 @@ def main():
                 beam = Beam(bird)
         tmr += 1
         screen.blit(bg_img, [0, 0])
+
+        score = pg.font.Font(None,80)
+        txt = score.render(f"score {N}", True ,(255,255,255))
+        screen.blit(txt,[100,100])
         
         for bomb in bombs:
             bomb.update(screen)
@@ -201,7 +205,6 @@ def main():
                     bird.change_img(6, screen)
                     pg.display.update()
                     break
-
 
         pg.display.update()
         clock.tick(1000)
