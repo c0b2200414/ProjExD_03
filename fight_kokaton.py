@@ -174,7 +174,7 @@ def main():
         screen.blit(bg_img, [0, 0])
 
         score = pg.font.Font(None,80)
-        txt = score.render(f"score {N}", True ,(255,255,255))
+        txt = score.render(f"score {N}", True ,(0,0,0))
         screen.blit(txt,[100,100])
         
         for bomb in bombs:
@@ -201,7 +201,11 @@ def main():
                     bird.change_img(6, screen)
                     pg.display.update()
                     break
-
+        if not bombs:
+            cong = pg.font.Font(None,250)
+            TXT = cong.render(f"Congratulation", True ,(255,255,255))
+            screen.blit(TXT,[100,200])
+            
         pg.display.update()
         clock.tick(1000)
 
